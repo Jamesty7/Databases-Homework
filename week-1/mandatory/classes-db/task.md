@@ -9,6 +9,117 @@ To submit this homework write the correct commands for each question here:
 ```sql
 
 
+CREATE TABLE mentors(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    years_in_glasgow SMALLINT NOT null,
+    address VARCHAR(100) NOT null,
+    favourite_language VARCHAR(25) NOT null
+);
+
+INSERT INTO mentors (name, years_in_glasgow, address, favourite_language)
+VALUES ('John', 23, '44 Red Road', 'JavaScript' );
+
+INSERT INTO mentors (name, years_in_glasgow, address, favourite_language)
+VALUES ('Jack', 5, '44 Santa Maria 34', 'JavaScript' );
+
+INSERT INTO mentors (name, years_in_glasgow, address, favourite_language)
+VALUES ('Fernando', 31, '22 Green Road', 'React');
+
+INSERT INTO mentors (name, years_in_glasgow, address, favourite_language)
+VALUES ('Jane', 5, 'Marina Street 67', 'Java');
+
+INSERT INTO mentors (name, years_in_glasgow, address, favourite_language)
+VALUES ('Ana', 50, '5th Avenue, 45', 'C++');
+
+
+
+CREATE TABLE students(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    graduated_from_code_your_future BOOLEAN
+);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Barbara', '2 High Road', TRUE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Mehtap', 'Industria 63', TRUE );
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Burçak', 'Carrer dels Pescadors', TRUE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('John', 'Siguenza 117' , TRUE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Johni deep', 'calle de Amber', TRUE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Kofi', 'carrer sant migel 6', FALSE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Isha', 'Calle de Virgilli', TRUE );
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Paul', '4th Street', TRUE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Usman Ghani', 'corts Catalaness', TRUE);
+
+INSERT INTO students (name, address, graduated_from_code_your_future)
+VALUES ('Gloria', 'carrer nou de santa clara 15 ', FALSE);
+
+
+CREATE TABLE classes(
+     id SERIAL PRIMARY KEY,
+     mentor_id INT REFERENCES mentors(id),
+     topic VARCHAR(30),
+     date DATE NOT NULL,
+     location VARCHAR(30) NOT NULL
+);
+
+INSERT INTO  classes (mentor_id, topic, date, location)
+VALUES (1, 'JavaScript', '2022-01-01','Barcelona');
+
+INSERT INTO  classes (mentor_id, topic, date, location)
+VALUES (2, 'Java', '2022-01-01','Barcelona');
+
+INSERT INTO  classes (mentor_id, topic, date, location)
+VALUES (3, 'Phyton', '2022-02-02','Barcelona');
+
+CREATE TABLE attendance(
+    id SERIAL PRIMARY KEY,
+    student_id INT REFERENCES students(id),
+    class_id INT REFERENCES classes(id)
+);
+
+INSERT INTO  attendance (student_id, class_id)
+VALUES (1, 2);
+
+INSERT INTO  attendance (student_id, class_id)
+VALUES (2, 3);
+
+INSERT INTO  attendance (student_id, class_id)
+VALUES (3, 2);
+
+INSERT INTO  attendance (student_id, class_id)
+VALUES (4, 3);
+
+INSERT INTO  attendance (student_id, class_id)
+VALUES (4, 1);
+
+select * from mentors where years_in_glasgow > 5;
+
+select * from mentors where favourite_language = 'JavaScript';
+
+select * from students where graduated_from_code_your_future = true;
+
+select * from classes where date < '2022-06-01';
+
+select attendance.student_id from attendance, classes  where classes.topic = 'JavaScript';
+
 ```
 
 When you have finished all of the questions - open a pull request with your answers to the `Databases-Homework` repository.
